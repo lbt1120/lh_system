@@ -20,6 +20,11 @@ let isAuthenticated=store.getters['login/userInfo'];
 
 // 路由守卫
 router.beforeEach((to, from, next) => {
+  // 动态修改title
+  if (to.meta.title) {
+    document.title = to.meta.title
+  }
+  // 判断是否登录
   if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
   else next()
 })
